@@ -9,7 +9,7 @@
 import struct
 import sys
 import threading
-import Queue
+import queue
 import os
 
 
@@ -29,17 +29,20 @@ if sys.platform == "win32":
 # Helper function that sends a message to the webapp.
 def send_message(message):
    # Write message size.
-  sys.stdout.write(struct.pack('I', len(message)))
+  #sys.stdout.write(struct.pack('I', len(message)))
   # Write the message itself.
   sys.stdout.write(message)
   sys.stdout.flush()
 
 def get_mac_address():
   mac = None
+  keyWords="物理地址"
+  print (keyWords)
   if sys.platform == "win32":
       for line in os.popen("ipconfig /all"):
-          print line
-          if line.lstrip().startswith("Physical Address"):
+          print (line)
+          # Physical Address
+          if line.lstrip().startswith(keyWords):
               mac = line.split(":")[1].strip().replace("-", ":")
               break
   else:
@@ -128,7 +131,7 @@ if Tkinter:
         mac = None
         if sys.platform == "win32":
             for line in os.popen("ipconfig /all"):
-                print line
+                print (line)
                 if line.lstrip().startswith("Physical Address"):
                     mac = line.split(":")[1].strip().replace("-", ":")
                     break
@@ -146,7 +149,7 @@ def Main():
     read_thread_func(None)
     sys.exit(0)
 
-  queue = Queue.Queue()
+  queue = queue.Queue()
 
   main_window = NativeMessagingWindow(queue)
   main_window.master.title('Native Messaging Example')
@@ -163,5 +166,6 @@ def Main():
 if __name__ == '__main__':
    #Main()
    address = get_mac_address()
+   print(address)
    text = '{"text": "' + address + '"}'
    send_message(text)

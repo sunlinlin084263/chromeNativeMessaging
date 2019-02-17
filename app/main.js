@@ -37,6 +37,7 @@
     }
 
     function onNativeMessage(message) {
+        alert("we");
         // appendMessage("Received message: <b>" + JSON.stringify(message) + "</b>");
         alert(JSON.stringify(message));
         chrome.storage.local.set({macAddress: message.text},function(){
@@ -56,6 +57,7 @@
 
     function connect() {
         var hostName = "com.google.chrome.example.echo";
+        alert(123);
         // appendMessage("Connecting to native messaging host <b>" + hostName + "</b>")
         port = chrome.runtime.connectNative(hostName);
         port.onMessage.addListener(onNativeMessage);
