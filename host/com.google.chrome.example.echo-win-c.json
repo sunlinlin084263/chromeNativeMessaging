@@ -1,0 +1,9 @@
+{
+  "name": "com.google.chrome.example.echo",
+  "description": "Chrome Native Messaging API Example Host",
+  "path": "f6Safe.exe",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://knldjmfmopnpolahpmmgbagdohdnhkik/"
+  ]
+}
